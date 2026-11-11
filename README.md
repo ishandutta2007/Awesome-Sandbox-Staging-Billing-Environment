@@ -9,10 +9,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Aeesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
   <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment?style=social" alt="GitHub Stars" /></a>
-  <a href="https://github.com/sindresorhus/awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a>
   <a href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://img.shields.io/badge/License-CC0%201.0-blue.svg" alt="License: CC0 1.0" /></a>
   <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+  <a href="https://github.com/ishandutta2007"><img alt="GitHub followers" src="https://img.shields.io/github/followers/ishandutta2007?label=Follow" /></a>
 </p>
 
 </div>
@@ -28,6 +30,8 @@
 - [💻 Open-Source Software & Mock Frameworks](#-open-source-software--mock-frameworks)
 - [⚖️ Architecture & Feature Comparison](#-architecture--feature-comparison)
 - [🎯 Best Practices for Billing Sandbox Testing](#-best-practices-for-billing-sandbox-testing)
+- [📈 Star History](#-star-history)
+- [💖 Support & Sponsorship](#-support--sponsorship)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
@@ -197,6 +201,23 @@ Self-hosted, community-driven tools for mocking payment gateways, simulating bil
 5. **⚡ Combine Unit Mocks with End-to-End Sandboxes:**
    * Use lightweight, offline tools like `stripe-mock` for instant CI pull-request checks (sub-second execution).
    * Reserve cloud SaaS staging sandboxes for nightly integration pipelines and pre-release smoke testing.
+
+---
+
+##  Star History
+[![Star History Chart](https://www.star-history.com/svg?repos=ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment&type=date&legend=top-left)](https://www.star-history.com/#ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment&type=date&legend=top-left)
+
+---
+
+## 💖 Support & Sponsorship
+
+Thank you so much for exploring and using this curated sandbox & staging billing guide! Building robust billing integrations without leaking test data or funds requires constant community effort. 
+
+If you find this repository valuable, please consider supporting the project:
+- 🌟 **Star this repository** to help other developers discover it.
+- 🍴 **Fork and contribute** your favorite billing staging tips and mock tooling.
+- 📢 **Share this guide** with your engineering team, fintech colleagues, or on social media.
+- ☕ **Buy me a coffee / Sponsor the project:** Support ongoing maintenance and new developer tooling guides via the [GitHub Sponsors Dashboard](https://github.com/sponsors/ishandutta2007).
 
 ---
 
