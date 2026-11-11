@@ -1,137 +1,222 @@
-# Awesome-Sandbox-Staging-Billing-Environment
+# 🧪 Awesome Sandbox & Staging Billing Environment 💳⚡
 
-# Awesome Sandbox & Staging Billing Environment
+<div align="center">
 
-> A curated list of top Sandbox and Staging Billing Environment platforms — both SaaS/Hosted commercial solutions and open-source alternatives for safely testing payment flows, billing logic, and subscription lifecycle without touching real money or customer data.
-> 🌟 Star this repo if you find it useful! 🌟
+![Awesome Sandbox & Staging Billing Environment Banner](./assets/banner.svg)
 
----
+<p align="center">
+  <strong>A battle-tested, curated collection of Sandbox and Staging Billing Environment platforms, stateful offline mock engines, and open-source simulators for testing payment flows, dunning lifecycle, and subscription logic without risking real money or customer data.</strong>
+</p>
 
-## 📋 Table of Contents
+<p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment?style=social" alt="GitHub Stars" /></a>
+  <a href="https://github.com/sindresorhus/awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a>
+  <a href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://img.shields.io/badge/License-CC0%201.0-blue.svg" alt="License: CC0 1.0" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+</p>
 
-- [SaaS / Hosted Platforms](#-saas--hosted-platforms)
-  - [Chargebee Test Site](#chargebee-test-site)
-  - [Stripe Test Mode](#stripe-test-mode)
-  - [PayPal Sandbox](#paypal-sandbox)
-  - [Braintree Sandbox](#braintree-sandbox)
-  - [Authorize.Net Sandbox](#authorizenet-sandbox)
-  - [Square Sandbox](#square-sandbox)
-  - [Adyen Test Platform](#adyen-test-platform)
-  - [Checkout.com Sandbox](#checkoutcom-sandbox)
-  - [FastSpring Test Mode](#fastspring-test-mode)
-  - [Rebilly Sandbox](#rebilly-sandbox)
-- [Open-Source Software](#-open-source-software)
-  - [seahaven-stripe-world](#seahaven-stripe-world)
-  - [paymock](#paymock)
-- [Comparison at a Glance](#-comparison-at-a-glance)
-- [Contributing](#-contributing)
+</div>
 
 ---
 
-## 🟦 SaaS / Hosted Platforms
+## 🧭 Table of Contents
 
-Commercial, cloud-hosted Sandbox and Staging Billing Environment platforms. These are not open-source but are included as reference points for feature comparison.
-
-### Chargebee Test Site
-**Type:** Full-featured billing sandbox with time simulation
-Chargebee provides every account with two sites: a **Test Site** and a **Live Site** . The Test Site is a sandbox environment where you can test billing configurations, create plans, add customers, and manage subscriptions without affecting actual customer data . It includes a **Chargebee Test Payment Gateway** that simulates payment success, failure (invalid card, insufficient funds), and smart routing scenarios . The standout feature is **Time Machine**, which allows you to virtually travel in time to test dunning, consolidated invoicing, subscription states, scheduled actions, and webhooks without waiting for real-world time to pass . Chargebee also offers AI-powered test site population by parsing your website's pricing page, automatically configuring product families, plans, addons, and brand elements [citation:1][citation:13].  
-**Best for:** Subscription businesses needing to test complex billing scenarios, dunning flows, and time-dependent logic without real-world waiting periods.
-
-### Stripe Test Mode
-**Type:** Comprehensive test environment with extensive test card library
-Stripe Test Mode is a fully isolated environment accessible via API keys prefixed with `sk_test_` and a separate dashboard toggle. It provides an extensive library of **test card numbers** to simulate virtually any payment outcome: successful charges, declines (insufficient funds, expired card, incorrect CVC), 3D Secure authentication flows (frictionless, challenge, out-of-band, one-time password), and mobile-specific verification UI flows [citation:2]. Test transactions settle instantly in test mode (unlike live mode), and webhooks can be triggered via the Stripe CLI or Dashboard. The test environment mirrors production APIs exactly, so code written against test mode works in live mode without modification.  
-**Best for:** Developers needing fine-grained control over payment simulation with the most comprehensive test card library and 3DS flow testing.
-
-### PayPal Sandbox
-**Type:** Virtual PayPal environment with buyer/seller account management
-PayPal Sandbox provides a self-contained virtual environment simulating the live PayPal production environment, with the same API feature set as live . It includes **sandbox accounts** for both buyers (personal) and sellers (business), which PayPal generates by default when you first log into the Developer Dashboard [citation:3]. You can create additional accounts, duplicate existing ones, bulk-upload accounts, or link existing sandbox accounts to your developer account. The sandbox test site (`sandbox.paypal.com`) mirrors the production site, allowing you to log in as buyer or seller to verify money movement, invoices, and account actions . API calls use `https://api-m.sandbox.paypal.com/` instead of the production URL.  
-**Best for:** Teams integrating PayPal payments needing to test both buyer and seller perspectives with realistic account balances and transaction flows.
-
-### Braintree Sandbox
-**Type:** Gateway sandbox with amount-triggered response scenarios
-Braintree's sandbox provides test card numbers for authorization and settlement testing [citation:4]. A unique feature is **amount-based response triggers**: transaction amounts in specific ranges produce different outcomes automatically. For example, amounts from $0.01 to $1999.99 are authorized and settled, $2000.00 to $2999.99 trigger a processor decline, $3000.00 to $3000.99 produce a failed 3000 processor response, and $5001.00 triggers a gateway rejection with "Application Incomplete" [citation:4]. This allows testing error handling without specifying special test cards for every scenario.  
-**Best for:** Teams wanting to test decline and error scenarios through transaction amount manipulation rather than memorizing test card numbers.
-
-### Authorize.Net Sandbox
-**Type:** Full-featured sandbox with auto-generated API credentials
-Authorize.Net provides a sandbox environment with most products and services enabled by default, including Automated Recurring Billing (ARB), Customer Information Manager (CIM), Invoicing, Virtual Point of Sale, and Mobile Point of Sale [citation:5]. API ID and Transaction Key are **auto-generated** for sandbox accounts, and SDKs are available for .NET, Java, PHP, Ruby, and Python via GitHub. **Important limitation:** The sandbox is for integration testing only and should **not** be used for load or stress testing—Authorize.Net may suspend accounts sending unusually high transaction volumes [citation:5]. Transactions settle at the account's Transaction Cut-Off Time (default 4 PM Pacific).  
-**Best for:** Developers needing a straightforward sandbox with auto-provisioned credentials and SDK support across multiple languages.
-
-### Square Sandbox
-**Type:** Isolated sandbox with API Explorer for reliable testing
-Square Sandbox is a free, isolated server environment with a separate base URL (`https://connect.squareupsandbox.com`) for testing Square APIs without affecting real data [citation:6]. Each application registered in the Developer Console gets its own Sandbox environment, and each test account gets a Sandbox Square Dashboard. **Critical caveat:** The Sandbox Dashboard has significant limitations—receipts are not generated, refunds can be viewed but not issued, subscriptions cannot be viewed or edited, and Square hardware cannot be used [citation:6]. Square explicitly recommends using the **API Explorer in Sandbox mode** for reliable test coverage, as it matches production API behavior more closely than the limited Dashboard. Sandbox test values (card numbers, payment tokens) must be used; real cards are rejected.  
-**Best for:** Developers wanting a clean sandbox with a reliable API Explorer, accepting that the Dashboard is limited for comprehensive testing.
-
-### Adyen Test Platform
-**Type:** Test environment with comprehensive card scenario library
-Adyen provides a test platform with standard test card numbers to simulate successful payments, declines (triggered by cardholder name or billing address fields), 3D Secure authentication, surcharges, and chargebacks [citation:7]. The API returns structured `declineCode` values (INSUFFICIENT_FUNDS, FRAUD_SUSPECTED, INVALID_CVC, etc.) with customer-friendly `declineReason` strings, allowing developers to verify error handling for each specific decline type. Refunds can be tested via API or the sandbox portal.  
-**Best for:** Teams needing to test specific decline codes and error handling paths with structured responses suitable for production UI.
-
-### Checkout.com Sandbox
-**Type:** Separate sandbox authorization server and base URLs
-Checkout.com provides a distinct sandbox environment with its own authorization server (`https://{prefix}.access.sandbox.checkout.com/connect/token`) and sandbox-specific base URLs for each API (e.g., `https://balances.sandbox.checkout.com/balances/{id}`) [citation:8]. This isolation ensures sandbox tokens and resources cannot be used in production. The sandbox mirrors production API structure, allowing full integration testing before going live.  
-**Best for:** Checkout.com merchants needing a cleanly separated sandbox with distinct credentials and URLs for each service.
-
-### FastSpring Test Mode
-**Type:** Hosted checkout test mode with `test.onfastspring.com` domain
-FastSpring provides a test mode accessible via a distinct domain pattern: `https://{yourstore}.test.onfastspring.com` for test, versus `https://{yourstore}.onfastspring.com` for live [citation:9]. Test mode supports Web Checkouts (shareable links), Popup Checkouts (embedded via Store Builder script), and the Sessions API for programmatic checkout creation. Test orders use test payment details, and the `order.completed` webhook fires in test mode for fulfillment verification.  
-**Best for:** Teams using FastSpring's hosted checkout needing a straightforward test mode with the same checkout experience as production.
-
-### Rebilly Sandbox
-**Type:** Sandbox with TestProcessor gateway and 90-day retention
-Rebilly provides a sandbox environment accessible at `app-sandbox.rebilly.com`, with a yellow warning banner indicating sandbox mode [citation:10]. It is pre-configured with a **TestProcessor** gateway that sends no information to third parties. Sandbox and live environments share login credentials and some organizations/users but are otherwise separate—hosted payment forms and gateways must be recreated in live. **Important:** Recurring orders in sandbox are automatically canceled after 90 days unless kept [citation:10].  
-**Best for:** Rebilly users needing a simple sandbox with a built-in test gateway and awareness of the 90-day recurring order retention limit.
+- [🌐 Sector Overview & Market Dynamics](#-sector-overview--market-dynamics)
+- [🏢 SaaS & Hosted Billing Sandboxes](#-saas--hosted-billing-sandboxes)
+  - [📊 SaaS Platforms Feature & Pricing Breakdown](#-saas-platforms-feature--pricing-breakdown)
+  - [🔍 Detailed SaaS Profiles](#-detailed-saas-profiles)
+- [💻 Open-Source Software & Mock Frameworks](#-open-source-software--mock-frameworks)
+- [⚖️ Architecture & Feature Comparison](#-architecture--feature-comparison)
+- [🎯 Best Practices for Billing Sandbox Testing](#-best-practices-for-billing-sandbox-testing)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ---
 
-## 🟩 Open-Source Software
+## 🌐 Sector Overview & Market Dynamics
 
-Self-hosted, community-driven Sandbox and Staging Billing Environment tools. The open-source ecosystem for **billing sandboxes** is very limited, but two projects provide stateful mock environments for Stripe and African payment gateways.
+The global **billing and subscription management software market** is estimated at **$7.2B–$8.5B in 2024–2025** and is projected to surpass **$20B by 2030** (growing at a compound annual growth rate of 14%–16.4%), propelled by the mass transition toward consumption-based billing, multi-tier SaaS, and complex global tax/e-invoicing mandates.
 
-### seahaven-stripe-world
-**Stack:** Python | **License:** Open Source (per PyPI)
-seahaven-stripe-world is a **stateful Stripe sandbox** designed for agent evaluations, reinforcement learning, and tests [citation:11]. Unlike Stripe's native test mode, which is stateless across API calls, seahaven maintains state within a world instance—customers, subscriptions, invoices, and payment methods persist between requests. It reproduces **8 of the 10 tools** on Stripe's MCP server, allowing AI agents (Claude Desktop, etc.) to interact with a realistic Stripe environment that resets between runs. **Failure injection** works with Stripe's test cards, so you can test decline paths (e.g., `insufficient_funds`) exactly as in test mode. Fixtures allow freezing a starting state (e.g., a "Pro plan at $20/month with three customers") for reproducible tests.  
-**Best for:** AI agent developers and researchers needing a stateful, reproducible Stripe environment for evaluation and testing, not as a replacement for Stripe's native test mode.
-
-### paymock
-**Stack:** Python | **License:** Open Source (per PyPI)
-paymock is a **stateful, offline mock server for Paystack and Flutterwave** (African payment gateways) that includes signed webhooks, no API keys, and no live internet requirement [citation:12]. It addresses the pain of brittle sandboxes and webhook delivery that requires public tunnels. Features include: forcing payment outcomes (`POST /_settle/:ref {"status": "failed"}`), exact HMAC signature generation for webhook verification, **failure injection** for testing decline and timeout paths, auto-delivery of webhooks with real retry schedules, and scenarios for duplicate/delayed/out-of-order webhooks. Transactions persist in memory between requests, and time compression (`PAYMOCK_TIME_SCALE`) allows retry schedules to resolve in milliseconds during tests.  
-**Best for:** Developers building on Paystack or Flutterwave needing a reliable, offline sandbox with realistic webhook behavior and failure injection that the official gateways do not provide.
+The market is **moderately fragmented yet features a concentrated, winner-take-most core**: mega-scale payment processing and developer gateway layers are dominated by a handful of infrastructure giants (such as **Stripe**, **PayPal**, and **Adyen**), while the specialized subscription lifecycle, dunning orchestration, and local payment gateway spaces remain fragmented with competitive contenders like **Chargebee**, **Rebilly**, and emergent open-source platforms.
 
 ---
 
-## 📊 Comparison at a Glance
+## 🏢 SaaS & Hosted Billing Sandboxes
 
-| Software | License | Stack | Time Simulation | Failure Injection | Self-Hosted | Best For |
-|----------|---------|-------|-----------------|-------------------|-------------|----------|
-| **Chargebee Test Site** | Proprietary | Cloud | ✅ Time Machine | ✅ Test Gateway | ❌ | Billing lifecycle + dunning |
-| **Stripe Test Mode** | Proprietary | Cloud | ❌ | ✅ Test cards + 3DS | ❌ | Payment scenario coverage |
-| **PayPal Sandbox** | Proprietary | Cloud | ❌ | ✅ Account states | ❌ | Buyer/seller perspective |
-| **Braintree Sandbox** | Proprietary | Cloud | ❌ | ✅ Amount-triggered | ❌ | Amount-based decline testing |
-| **Square Sandbox** | Proprietary | Cloud | ❌ | ✅ Test values | ❌ | API Explorer reliability |
-| **Adyen Test** | Proprietary | Cloud | ❌ | ✅ Decline codes | ❌ | Structured decline handling |
-| **seahaven-stripe-world** | Open Source | Python | ✅ Fixed clock | ✅ Stripe test cards | ✅ | Stateful agent evaluation |
-| **paymock** | Open Source | Python | ✅ Time scale | ✅ Forced outcomes | ✅ | Offline Paystack/Flutterwave |
+Commercial, cloud-hosted billing environments provide dedicated test modes, virtual bank accounts, and simulated card gateways. Below is a sorted breakdown based on company size (market valuation / annual revenue), highlighting transparent entry-level pricing and strict free tier limits.
+
+### 📊 SaaS Platforms Feature & Pricing Breakdown
+
+| 🏷️ Company / Sandbox Platform | 🏢 Scale (Valuation / Revenue) | 💵 Starting Tier Pricing | 🎁 Free Tier Limit / Trial Duration | ⏱️ Time Simulation | 🧪 Failure Injection |
+|---|---|---|---|:---:|:---:|
+| **PayPal Sandbox** | **~$80B Valuation** (~$31.8B Annual Rev) | **$0/mo** + 2.9% + $0.30 per live transaction | **Permanent Free Sandbox Access** (unlimited virtual buyer/seller test accounts; live mode charges pay-as-you-go per transaction) | ❌ | ✅ Account balances & state triggers |
+| **Stripe Test Mode** | **$70B Valuation** (~$4.2B Net Rev) | **$0/mo** + 2.9% + $0.30 per live transaction | **Permanent Free Test Mode Access** (unlimited API calls and test card transactions; live mode charges 0% platform base fee) | ❌ | ✅ Extensive test cards & 3DS friction flows |
+| **Square Sandbox** | **~$45B Valuation** (~$23.9B Annual Rev) | **$0/mo** + 2.6% + $0.10 per live transaction | **Permanent Free Sandbox Access** (unlimited API Explorer sandbox requests, sandbox OAuth tokens, and test cards) | ❌ | ✅ Specific CVV/amount failure values |
+| **Adyen Test Platform** | **~$40B Valuation** (~€1.8B Net Rev) | **€100/mo minimum platform invoice** + €0.11 + interchange fee | **Permanent Free Test Environment** (unlimited simulated multi-currency and regional acquirer routing tests; test account never expires) | ❌ | ✅ Granular raw acquirer decline codes |
+| **Authorize.Net Sandbox** | **~$10B Est. Division Scale** (Visa Subsidiary) | **$25/mo gateway fee** + $0.10 per txn (or 2.9% + $0.30 all-in-one) | **Permanent Free Developer Sandbox** ($0/mo developer account, zero transaction fees for simulated test card numbers) | ❌ | ✅ Modulo 10 Luhn check & test amount triggers |
+| **Checkout.com Sandbox** | **$12B Valuation** (~$750M Net Rev Run-Rate) | **Custom Volume Pricing** (starts at ~0.95% + €0.02 to 1.99% per txn) | **Permanent Free Sandbox Access** (full developer portal test keys, test webhook events, and test 3DS card simulations) | ❌ | ✅ Soft and hard gateway decline simulation |
+| **Chargebee Test Site** | **$3.5B Valuation** (~$202M Annual Rev) | **$599/mo** (Performance plan billed annually for scaling teams) | **Starter Plan Free up to $250,000 cumulative lifetime billing** (0.75% overage fee applies beyond $250k; includes full Test Site & Time Machine) | ✅ Time Machine | ✅ Chargebee Test Gateway & smart routing |
+| **Braintree Sandbox** | **~$3.0B Est. Scale** (PayPal Subsidiary) | **$0/mo** + 2.59% + $0.49 per live transaction | **Permanent Free Sandbox Account** (unlimited sandbox API calls, virtual merchant dashboard, and amount-based trigger testing) | ❌ | ✅ Amount-based trigger rules ($2000+ declines) |
+| **FastSpring Test Mode** | **~$100M+ Annual Rev** (Backed by Accel-KKR) | **Revenue share commission** (~3.9%–5.9% per transaction) | **14-day assisted demo trial for production MoR** (unlimited sandbox storefront and test-order execution before contract launch) | ❌ | ✅ Simulated test orders & tax exemption modes |
+| **Rebilly Sandbox** | **~$6M–$7M Annual Rev** (Bootstrapped) | **$125/mo** base plan + ~1% volume collection fee | **30-Day Free Trial of Pro Plan** (includes complete sandbox environment with time-machine-like event triggers; no permanent free tier) | ✅ Event simulation | ✅ Custom gateway response simulation |
+
+---
+
+### 🔍 Detailed SaaS Profiles
+
+#### 💳 Chargebee Test Site
+* **Type:** Full-featured billing sandbox with time simulation.
+* **Overview:** Chargebee equips every account with paired environments: a **Live Site** and an isolated **Test Site**. The Test Site allows engineering teams to construct pricing matrices, mock plans, register customer entities, and execute complete subscription lifecycles without polluting production databases.
+* **Key Capabilities:**
+  * **Time Machine:** Virtually travel forward in time to validate multi-phase dunning schedules, automated invoicing, renewal webhooks, and grace periods without waiting for real-world days or months to pass.
+  * **Test Payment Gateway:** Replicates instant authorizations, insufficient funds, expired cards, and gateway timeout conditions.
+  * **AI Catalog Population:** Auto-populates products, currencies, and add-ons by parsing public pricing URLs.
+* **Best for:** SaaS startups and enterprises managing complex recurring billing, usage proration, and dunning workflows.
+
+#### 💳 Stripe Test Mode
+* **Type:** High-fidelity developer gateway sandbox with comprehensive test card library.
+* **Overview:** Stripe Test Mode provides a frictionless developer environment activated via dashboard toggles or API keys (`sk_test_...`). Test transactions mirror live operational processing exactly without settling real funds.
+* **Key Capabilities:**
+  * **Test Card Library:** Simulates specific fraud triggers, insufficient balance (`generic_decline`, `insufficient_funds`), incorrect CVC, and frictionless or challenge 3D Secure 2 (3DS2) biometric/OTP flows.
+  * **Stripe CLI & Webhook Triggering:** Dispatch mock webhooks locally (`stripe trigger payment_intent.succeeded`) directly into localhost endpoints without requiring cloud tunnels.
+  * **Test Clocks:** Simulate billing cycles, proration calculation, and subscription phase transitions across advance timestamps.
+* **Best for:** Developers requiring precise, granular control over card processing outcomes, compliance verification, and frictionless webhook integration.
+
+#### 💳 PayPal Sandbox
+* **Type:** Full virtual buyer and merchant ecosystem.
+* **Overview:** The PayPal Sandbox operates on dedicated developer infrastructure (`api-m.sandbox.paypal.com` and `sandbox.paypal.com`), offering complete buyer and business merchant account mocks.
+* **Key Capabilities:**
+  * **Virtual Account Portfolios:** Generate pre-funded virtual customer accounts with customizable bank balances and credit lines.
+  * **Two-Sided Flow Verification:** Log in as both consumer and merchant to inspect money movement, disputes, refunds, and instant payment notifications (IPN / Webhooks).
+* **Best for:** Engineering teams integrating PayPal buttons, multi-party marketplace payouts, and dual-party dispute resolution workflows.
+
+#### 💳 Braintree Sandbox
+* **Type:** Gateway testbed featuring automated amount-triggered decline scenarios.
+* **Overview:** A sandbox subsidiary environment designed for rapid testing of card verification, tokenization, and digital wallets (Apple Pay, Google Pay).
+* **Key Capabilities:**
+  * **Amount-Based Triggering:** Authorizations automatically produce deterministic test outcomes based on dollar amounts (e.g., $0.01–$1,999.99 for authorized success, $2,000.00 for Do Not Honor decline, $2,001.00 for Insufficient Funds).
+  * **Settlement State Control:** Force transactions into authorized, submitted for settlement, settled, or voided states via dashboard controls.
+* **Best for:** Engineers validating automated dispute pipelines and predictable unit tests without requiring custom mock headers.
+
+#### 💳 Square Sandbox
+* **Type:** Point-of-Sale (POS) and eCommerce developer environment.
+* **Overview:** Provides an interactive web-based API Explorer directly tied to active sandbox credentials for quick API validation.
+* **Key Capabilities:**
+  * **Interactive Explorer:** Execute sandbox requests directly from API reference documentation using real test tokens.
+  * **Omnichannel Testing:** Test unified transactions spanning online checkouts, in-person hardware simulations, and invoice billing.
+* **Best for:** Hybrid businesses synchronizing online SaaS billing with physical point-of-sale systems.
+
+#### 💳 Adyen Test Platform
+* **Type:** Global enterprise payment engine testbed.
+* **Overview:** An enterprise-grade staging platform mirroring Adyen's unified commerce setup across multi-currency and global card schemes.
+* **Key Capabilities:**
+  * **Acquirer Response Simulation:** Emulate granular raw response codes across Visa, Mastercard, American Express, and 250+ local alternative payment methods (iDEAL, Klarna, WeChat Pay).
+  * **Refusal Reason Emulation:** Test raw banking error handling including 3DS fallback, CVC mismatches, and risk engine blocks.
+* **Best for:** Large enterprise engineering teams managing multi-region transaction routing and localized alternative payment schemes.
+
+#### 💳 Authorize.Net Sandbox
+* **Type:** Legacy and modern gateway developer simulator.
+* **Overview:** Completely isolated test environment for validating Authorize.Net API integrations, Customer Information Manager (CIM), and Automated Recurring Billing (ARB).
+* **Key Capabilities:**
+  * **CIM Tokenization:** Test customer profile generation and recurrent subscription billing schedules.
+  * **Deterministic Test Inputs:** Predictable card inputs designed to simulate approval, decline, and merchant configuration errors.
+* **Best for:** Traditional merchant gateway integrations, healthcare billing, and legacy enterprise software stacks.
+
+#### 💳 Checkout.com Sandbox
+* **Type:** Cloud-native global acquiring and payment orchestration sandbox.
+* **Overview:** High-velocity payment orchestration environment providing deep visibility into raw ISO 8583 error codes and webhook mechanics.
+* **Key Capabilities:**
+  * **Granular Decline Mapping:** Simulate 3DS challenge requirements, risk rule triggers, and card network chargebacks.
+  * **Full API & Dashboard Sandbox:** Isolated dashboard environment for verifying customer disputes, refunds, and settlement reports.
+* **Best for:** High-volume digital platforms, international remittances, and multi-entity marketplaces.
+
+#### 💳 FastSpring Test Mode
+* **Type:** Full Merchant of Record (MoR) staging environment.
+* **Overview:** Designed specifically for digital downloads, SaaS subscriptions, and software vendors needing to test end-to-end checkout, VAT/sales tax automation, and international invoicing.
+* **Key Capabilities:**
+  * **Test Orders:** Place live-lookalike orders using dedicated test payment credentials without billing actual credit accounts.
+  * **Tax Exemption Verification:** Test location-based tax assessments (EU VAT, US sales taxes) across simulated country IPs.
+* **Best for:** Software companies outsourcing global tax remittance, compliance, and localized SaaS checkout logic.
+
+#### 💳 Rebilly Sandbox
+* **Type:** Subscription orchestration and payment routing sandbox.
+* **Overview:** Built for sophisticated subscription billing logic, cross-gateway routing rules, and churn reduction strategies.
+* **Key Capabilities:**
+  * **Gateway Mock Switch:** Route payments between multiple test payment processors to evaluate failover and cascading routing logic.
+  * **Event Simulation:** Trigger arbitrary subscription states (delinquent, canceled, renewed) to verify downstream integrations.
+* **Best for:** High-growth subscription architectures requiring intelligent gateway failover and churn prevention modeling.
+
+---
+
+## 💻 Open-Source Software & Mock Frameworks
+
+Self-hosted, community-driven tools for mocking payment gateways, simulating billing engines, and running offline test suites. 
+
+> *The open-source table below is strictly sorted by **GitHub Star Count (descending)**. Every repository badge links directly to its live GitHub stargazers directory.*
+
+| 🛠️ Open-Source Project | 🌟 GitHub Stars (Social Badge) | 🧰 Technology Stack | 📜 Open-Source License | 💡 Core Purpose & Sandbox Utility |
+|---|:---:|---|---|---|
+| **[Lago](https://github.com/getlago/lago)** | [![Lago Stars](https://img.shields.io/github/stars/getlago/lago?style=social&color=white)](https://github.com/getlago/lago/stargazers) | Ruby on Rails, Go | AGPL-3.0 | Complete open-source metering and usage-based subscription billing platform. Deployable locally via Docker to simulate hybrid pricing, proration, and invoice generation in self-hosted CI/CD pipelines. |
+| **[Kill Bill](https://github.com/killbill/killbill)** | [![Kill Bill Stars](https://img.shields.io/github/stars/killbill/killbill?style=social&color=white)](https://github.com/killbill/killbill/stargazers) | Java | Apache-2.0 | The open-source standard for recurring billing and payment orchestration. Includes a built-in payment plugin architecture, test payment gateway stub, and deterministic time clock to advance billing intervals instantly. |
+| **[OpenMeter](https://github.com/openmeterio/openmeter)** | [![OpenMeter Stars](https://img.shields.io/github/stars/openmeterio/openmeter?style=social&color=white)](https://github.com/openmeterio/openmeter/stargazers) | Go, ClickHouse | Apache-2.0 | Cloud-native, high-throughput usage metering engine for AI models and developer infrastructure. Allows spinning up local staging instances to test usage limits, quota alerts, and Stripe webhook syncing without internet connectivity. |
+| **[stripe-mock](https://github.com/stripe/stripe-mock)** | [![stripe-mock Stars](https://img.shields.io/github/stars/stripe/stripe-mock?style=social&color=white)](https://github.com/stripe/stripe-mock/stargazers) | Go | MIT | Official mock HTTP server written by Stripe. Reads OpenAPI specifications to generate instantaneous local responses matching Stripe's API contract. Eliminates network latency, rate limits, and external dependencies in unit test suites. |
+| **[acquiremock](https://github.com/ashfromsky/acquiremock)** | [![acquiremock Stars](https://img.shields.io/github/stars/ashfromsky/acquiremock?style=social&color=white)](https://github.com/ashfromsky/acquiremock/stargazers) | Python, FastAPI, Docker | MIT | Standalone, containerized mock payment gateway featuring a local browser checkout UI, mock OTP SMS verification, cryptographic HMAC webhook signatures, and deterministic card success/failure simulation. |
+| **[seahaven-stripe-world](https://github.com/Kiln-AI/Seahaven)** | [![Seahaven Stars](https://img.shields.io/github/stars/Kiln-AI/Seahaven?style=social&color=white)](https://github.com/Kiln-AI/Seahaven/stargazers) | Python | Apache-2.0 | Stateful Stripe environment created by Kiln AI for AI agents and reinforcement learning evals. Unlike stateless mocks, it maintains full customer, plan, and invoice database state across API operations with deterministic snapshot resets. |
+| **[paymock](https://github.com/chitrakulkarni2830/payMock)** | [![paymock Stars](https://img.shields.io/github/stars/chitrakulkarni2830/payMock?style=social&color=white)](https://github.com/chitrakulkarni2830/payMock/stargazers) | JavaScript, Node.js, Express | MIT | Full-stack payment gateway simulator and offline testbed. Replicates end-to-end payment submission, database persistence, status callbacks, and edge-case failure handling for payment integration pipelines. |
+
+---
+
+## ⚖️ Architecture & Feature Comparison
+
+| Solution | Model | Time Travel Simulation | Offline / Air-Gapped | Failure & Decline Injection | Best For |
+|---|---|:---:|:---:|:---:|---|
+| **Chargebee Test Site** | SaaS / Cloud | ✅ Time Machine | ❌ | ✅ Gateway Test Rules | Complex dunning, proration & renewal testing |
+| **Stripe Test Mode** | SaaS / Cloud | ✅ Test Clocks | ❌ | ✅ Test Card Library & 3DS | Comprehensive payment acceptance testing |
+| **Adyen / PayPal / Braintree** | SaaS / Cloud | ❌ | ❌ | ✅ Amount & Code Mappings | Multi-provider & regional payment testing |
+| **stripe-mock** | Open-Source / Self-Hosted | ❌ | ✅ Fast Local Mock | ❌ Contract Only | Millisecond-level local unit test suites |
+| **Kill Bill** | Open-Source / Self-Hosted | ✅ Virtual Clock | ✅ Full Stack | ✅ Plugin Error Injection | Complete self-hosted billing architecture |
+| **Lago** | Open-Source / Self-Hosted | ❌ | ✅ Full Stack | ✅ Webhook Error Triggering | Metered SaaS & usage-based billing staging |
+| **acquiremock** | Open-Source / Self-Hosted | ❌ | ✅ Full Stack | ✅ UI Decline / OTP Timeout | Local end-to-end checkout & webhook testing |
+| **seahaven-stripe-world** | Open-Source / Self-Hosted | ✅ Frozen Timestamps | ✅ Full Stack | ✅ Stateful Injections | AI autonomous agent evals & stateful testing |
+
+---
+
+## 🎯 Best Practices for Billing Sandbox Testing
+
+1. **🔒 Never Use Real Financial Identifiers:** Always verify your integration uses isolated test API keys (`sk_test_...`) and pre-configured test card numbers. Ensure zero real credit card PANs ever pass through staging or development logs.
+2. **⏰ Validate Subscription Edge Cases with Time Simulation:**
+   * Subscription upgrade/downgrade mid-cycle with immediate vs. end-of-period proration.
+   * Grace period logic and automated card retry schedules during dunning.
+   * Subscription cancellation with scheduled termination vs. instant revocation.
+3. **💥 Test Unhappy Paths First:**
+   * Insufficient funds (`402 Payment Required`).
+   * 3D Secure biometric challenge declines or abandoned customer sessions.
+   * Webhook retries with delayed or out-of-order network arrival.
+4. **🔁 Enforce Idempotency:**
+   * Every billing mutation API call should carry unique `Idempotency-Key` headers to ensure network retries never produce duplicate charges.
+5. **⚡ Combine Unit Mocks with End-to-End Sandboxes:**
+   * Use lightweight, offline tools like `stripe-mock` for instant CI pull-request checks (sub-second execution).
+   * Reserve cloud SaaS staging sandboxes for nightly integration pipelines and pre-release smoke testing.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you know of an open-source Sandbox or Staging Billing Environment tool that should be listed here, please open a pull request with:
+Contributions are warmly welcomed! If you maintain or use a billing sandbox, payment mock, or subscription testing tool that should be featured:
 
-- Project name and URL
-- Brief description (1–2 sentences)
-- Stack and license
-- Why it stands out
-
-Please ensure the project is actively maintained (releases within the last 12 months) and genuinely open-source. Note that the open-source ecosystem for **billing sandboxes** is extremely limited—most payment gateways provide proprietary sandbox environments that cannot be self-hosted or replaced. **seahaven-stripe-world** is notable for adding **statefulness** that Stripe's native test mode lacks, making it suitable for AI agent evaluations where reproducible starting states matter [citation:11]. **paymock** fills a specific gap for African payment gateways (Paystack, Flutterwave) by providing offline, stateful mocking with realistic webhook retry behavior that the official sandboxes do not expose [citation:12]. For production billing logic testing (plans, dunning, proration), commercial platforms like Chargebee's Test Site with Time Machine remain unmatched by open-source alternatives.
+1. 🍴 Fork the repository.
+2. 🌿 Create a feature branch: `git checkout -b feat/add-billing-tool`.
+3. 📝 Update `README.md` with your tool (including accurate licensing, pricing, and GitHub star badges).
+4. 🚀 Open a Pull Request with a clear description of the project's unique testing capabilities.
 
 ---
 
 ## 📄 License
 
-This list is released under CC0 1.0 Universal (Public Domain). The software projects listed retain their respective licenses.
+This repository and curated list are published under the [Creative Commons Zero v1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) public domain dedication.
 
 ---
 
-⭐ **If this list helped you discover a useful tool, please star the repo!** ⭐
+<div align="center">
+  <strong>⭐ If this curated list helped you build more resilient billing infrastructure, please star this repository! ⭐</strong>
+</div>
