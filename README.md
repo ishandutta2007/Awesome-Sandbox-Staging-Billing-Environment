@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Aeesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
-  <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment?style=social" alt="GitHub Stars" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment?style=social" alt="GitHub_Stars" /></a>
   <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a>
   <a href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://img.shields.io/badge/License-CC0%201.0-blue.svg" alt="License: CC0 1.0" /></a>
   <a href="https://github.com/ishandutta2007/Awesome-Sandbox-Staging-Billing-Environment/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" /></a>
@@ -156,9 +156,9 @@ Commercial, cloud-hosted billing environments provide dedicated test modes, virt
 
 Self-hosted, community-driven tools for mocking payment gateways, simulating billing engines, and running offline test suites. 
 
-> *The open-source table below is strictly sorted by **GitHub Star Count (descending)**. Every repository badge links directly to its live GitHub stargazers directory.*
+> *The open-source table below is strictly sorted by **GitHub Stars_Count (descending)**. Every repository badge links directly to its live GitHub stargazers directory.*
 
-| 🛠️ Open-Source Project | 🌟 GitHub Stars (Social Badge) | 🧰 Technology Stack | 📜 Open-Source License | 💡 Core Purpose & Sandbox Utility |
+| 🛠️ Open-Source Project | 🌟 GitHub_Stars (Social Badge) | 🧰 Technology Stack | 📜 Open-Source License | 💡 Core Purpose & Sandbox Utility |
 |---|:---:|---|---|---|
 | **[Lago](https://github.com/getlago/lago)** | [![Lago Stars](https://img.shields.io/github/stars/getlago/lago?style=social&color=white)](https://github.com/getlago/lago/stargazers) | Ruby on Rails, Go | AGPL-3.0 | Complete open-source metering and usage-based subscription billing platform. Deployable locally via Docker to simulate hybrid pricing, proration, and invoice generation in self-hosted CI/CD pipelines. |
 | **[Kill Bill](https://github.com/killbill/killbill)** | [![Kill Bill Stars](https://img.shields.io/github/stars/killbill/killbill?style=social&color=white)](https://github.com/killbill/killbill/stargazers) | Java | Apache-2.0 | The open-source standard for recurring billing and payment orchestration. Includes a built-in payment plugin architecture, test payment gateway stub, and deterministic time clock to advance billing intervals instantly. |
@@ -227,7 +227,7 @@ Contributions are warmly welcomed! If you maintain or use a billing sandbox, pay
 
 1. 🍴 Fork the repository.
 2. 🌿 Create a feature branch: `git checkout -b feat/add-billing-tool`.
-3. 📝 Update `README.md` with your tool (including accurate licensing, pricing, and GitHub star badges).
+3. 📝 Update `README.md` with your tool (including accurate licensing, pricing, and GitHub Stars_Badges).
 4. 🚀 Open a Pull Request with a clear description of the project's unique testing capabilities.
 
 ---
